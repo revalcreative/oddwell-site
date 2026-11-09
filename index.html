@@ -1,0 +1,392 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Oddwell</title>
+<meta name="description" content="Oddwell is a curious, creative company that turns everyday obsessions into useful apps and brands. Makers of Wove, Cook Club and Faith Under the Stars.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Instrument+Serif:ital@0;1&display=swap">
+<style>
+/* Layout: a cabinet of curiosities. Big wordmark, a ticker of everyday questions,
+   then each app catalogued as a numbered tag, like a garment care label.
+   Brand colors: olive, sage, cream, terracotta. Single cream theme by design. */
+:root {
+  --paper: #f5f1e8;      /* cream */
+  --paper-2: #ebe4d6;
+  --ink: #243126;        /* olive */
+  --ink-soft: #5d6559;
+  --sage: #7a8570;
+  --terracotta: #c48064;
+  --rule: #d9d1c1;
+  --tag: #fbf9f4;
+  --stitch: #b9bfae;
+  --on-dark: #f5f1e8;
+
+  --f-sans: "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
+  --f-serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+
+  --step--1: 0.8125rem;
+  --step-0: 1.0625rem;
+  --step-1: 1.25rem;
+  --step-2: 1.7rem;
+  --step-3: clamp(2rem, 5vw, 3rem);
+  --step-4: clamp(3.6rem, 15vw, 10rem);
+  --max: 1120px;
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--f-sans);
+  font-size: var(--step-0);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--terracotta); outline-offset: 3px; border-radius: 4px; }
+
+.wrap {
+  max-width: var(--max);
+  margin-inline: auto;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+}
+.label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+}
+.solved { font-family: var(--f-serif); font-style: italic; font-weight: 400; letter-spacing: 0; }
+
+/* ---------- nav ---------- */
+.nav { padding-block: 20px; }
+.nav .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.logo { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; }
+.mark {
+  width: 40px; height: 40px; border-radius: 50%; flex: none;
+  display: grid; place-items: center;
+  background: var(--ink); color: var(--paper);
+  font-weight: 800; font-size: 0.88rem; letter-spacing: -0.04em;
+}
+.wordmark-sm { font-weight: 800; font-size: 1.35rem; letter-spacing: -0.05em; line-height: 1; }
+.nav ul { list-style: none; display: flex; gap: 22px; margin: 0; padding: 0; }
+.nav ul a { text-decoration: none; color: var(--ink-soft); font-weight: 500; }
+.nav ul a:hover { color: var(--ink); }
+
+/* ---------- hero ---------- */
+.hero { padding-block: clamp(40px, 8vw, 96px) clamp(32px, 6vw, 64px); }
+.hero .eyebrow { color: var(--ink-soft); margin: 0 0 18px; }
+.wordmark {
+  font-weight: 800;
+  font-size: var(--step-4);
+  line-height: 0.85;
+  letter-spacing: -0.065em;
+  margin: 0;
+}
+.hero-grid {
+  display: grid; gap: 28px 56px;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  align-items: end; margin-top: clamp(28px, 4vw, 44px);
+}
+.hero h2 {
+  font-weight: 600;
+  font-size: var(--step-3); line-height: 1.05; letter-spacing: -0.035em;
+  margin: 0; text-wrap: balance;
+}
+.hero h2 .solved { font-size: 1.12em; color: var(--terracotta); }
+.hero p.lede { margin: 0; color: var(--ink-soft); max-width: 46ch; }
+.cta-row { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 22px; }
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--f-sans); font-weight: 500; font-size: 0.98rem;
+  padding: 12px 20px; border-radius: 999px; text-decoration: none;
+  border: 1.5px solid var(--ink); transition: transform .15s ease;
+}
+.btn:hover { transform: translateY(-2px); }
+.btn.solid { background: var(--ink); color: var(--paper); }
+.btn.ghost { background: transparent; color: var(--ink); }
+
+/* ---------- ticker ---------- */
+.ticker {
+  background: var(--ink);
+  color: var(--on-dark);
+  overflow: hidden;
+  padding-block: 16px;
+}
+.ticker-track { display: flex; width: max-content; animation: slide 52s linear infinite; }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+.ticker ul { list-style: none; margin: 0; padding: 0; display: flex; }
+.ticker li {
+  font-family: var(--f-serif); font-style: italic; font-size: 1.5rem;
+  white-space: nowrap; display: flex; align-items: center; gap: 26px; padding-right: 26px;
+}
+.ticker li::after { content: "ow."; font-family: var(--f-sans); font-style: normal; font-weight: 800; font-size: 0.8rem; letter-spacing: -0.04em; color: var(--terracotta); }
+@keyframes slide { to { transform: translateX(-50%); } }
+
+/* ---------- sections ---------- */
+section.block { padding-block: clamp(56px, 9vw, 112px); }
+.sec-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; flex-wrap: wrap; margin-bottom: clamp(28px, 4vw, 48px); }
+.sec-head h2 {
+  font-weight: 700; font-size: var(--step-3);
+  letter-spacing: -0.04em; line-height: 1; margin: 0; text-wrap: balance;
+}
+.sec-head p { margin: 0; color: var(--ink-soft); max-width: 42ch; }
+
+/* ---------- care-label tags ---------- */
+.tags { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; align-items: start; }
+.tag {
+  position: relative;
+  background: var(--tag); color: var(--ink);
+  border: 1.5px solid var(--ink);
+  border-radius: 6px 6px 18px 18px;
+  padding: 44px 22px 22px;
+  min-width: 0;
+  box-shadow: 6px 6px 0 var(--ink);
+  transition: transform .25s ease;
+}
+.tag::before { /* punch hole */
+  content: ""; position: absolute; top: 14px; left: 50%; translate: -50% 0;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--paper); border: 1.5px solid var(--ink);
+}
+.tag::after { /* stitched inner edge */
+  content: ""; position: absolute; inset: 7px; border: 1.5px dashed var(--stitch);
+  border-radius: 3px 3px 13px 13px; pointer-events: none;
+}
+.tag:nth-child(1) { transform: rotate(-1.4deg); }
+.tag:nth-child(2) { transform: rotate(1deg) translateY(18px); }
+.tag:nth-child(3) { transform: rotate(-0.6deg); }
+.tag:hover { transform: rotate(0) translateY(-4px); }
+.tag.wove { box-shadow: 6px 6px 0 var(--ink); }
+.tag.cook { box-shadow: 6px 6px 0 var(--terracotta); }
+.tag.faith { box-shadow: 6px 6px 0 var(--sage); }
+
+.tag-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; color: var(--ink-soft); }
+.tag-top .num { font-size: 0.75rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; }
+.status {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  padding: 4px 10px; border-radius: 999px; border: 1.5px solid currentColor; white-space: nowrap;
+}
+.status.live { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.tag h3 {
+  font-weight: 700; font-size: var(--step-2);
+  letter-spacing: -0.04em; line-height: 1; margin: 16px 0 6px;
+}
+.tag .promise { margin: 0 0 18px; font-family: var(--f-serif); font-style: italic; font-size: 1.3rem; line-height: 1.25; }
+.tag dl { margin: 0; display: grid; border-top: 1.5px solid var(--rule); }
+.tag dl > div { display: grid; grid-template-columns: 6.6rem minmax(0, 1fr); gap: 10px; padding-block: 9px; border-bottom: 1.5px solid var(--rule); }
+.tag dt { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-soft); padding-top: 3px; }
+.tag dd { margin: 0; font-size: 0.95rem; line-height: 1.45; overflow-wrap: anywhere; }
+.tag .go { display: inline-flex; margin-top: 18px; font-weight: 600; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+
+.next {
+  margin-top: 56px; border: 1.5px dashed var(--sage); border-radius: 18px;
+  padding: 20px 24px; display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;
+}
+.next p { margin: 0; color: var(--ink-soft); }
+.next strong { color: var(--ink); font-weight: 600; }
+.next a { font-weight: 600; text-underline-offset: 4px; }
+
+/* ---------- maker ---------- */
+.maker { background: var(--paper-2); }
+.maker-grid { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); gap: 40px 64px; align-items: start; }
+.maker blockquote {
+  margin: 0; font-weight: 600;
+  font-size: var(--step-2); line-height: 1.2; letter-spacing: -0.03em; text-wrap: balance;
+}
+.maker blockquote .solved { color: var(--terracotta); font-size: 1.1em; }
+.maker blockquote .mark { margin-bottom: 18px; }
+.maker .body p { margin: 0 0 1em; max-width: 60ch; }
+.maker .sig { color: var(--ink-soft); margin-top: 22px; }
+
+/* ---------- idea prompt ---------- */
+.prompt-inner { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); gap: 32px 56px; align-items: center; }
+.prompt h2 {
+  font-weight: 800; font-size: clamp(2.4rem, 7vw, 4.8rem);
+  letter-spacing: -0.055em; line-height: 0.95; margin: 0; text-wrap: balance;
+}
+.prompt h2 .solved { color: var(--terracotta); font-weight: 400; }
+.prompt p { margin: 0 0 20px; color: var(--ink-soft); max-width: 44ch; }
+
+/* ---------- footer ---------- */
+footer { border-top: 1.5px solid var(--ink); padding-block: 36px 48px; }
+.foot { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 24px; align-items: start; }
+.foot ul { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, auto); gap: 6px 28px; }
+.foot ul a { text-decoration: none; color: var(--ink-soft); }
+.foot ul a:hover { color: var(--ink); text-decoration: underline; }
+.foot .small { color: var(--ink-soft); margin-top: 12px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 900px) {
+  .tags { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .tag:nth-child(2) { transform: rotate(1deg); }
+}
+@media (max-width: 720px) {
+  .hero-grid, .maker-grid, .prompt-inner, .foot { grid-template-columns: minmax(0, 1fr); }
+  .tags { grid-template-columns: minmax(0, 1fr); gap: 32px; }
+  .nav ul { gap: 16px; }
+  .tag { margin-inline: 6px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .ticker { overflow-x: auto; }
+  .btn, .tag { transition: none; }
+}
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="logo" href="#top" aria-label="Oddwell home"><span class="mark" aria-hidden="true">ow.</span><span class="wordmark-sm">oddwell.</span></a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#apps">Apps</a></li>
+        <li><a href="#maker">About</a></li>
+        <li><a href="#say-hi">Say hi</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <p class="eyebrow label">An independent app studio · Makers of Wove, Cook Club + Faith Under the Stars</p>
+      <h1 class="wordmark">oddwell.</h1>
+      <div class="hero-grid">
+        <h2>Your Roman empires, <span class="solved">solved.</span></h2>
+        <div>
+          <p class="lede">A curious, creative company that turns everyday obsessions into useful apps and brands, starting with what's in your clothes and what's for dinner.</p>
+          <div class="cta-row">
+            <a class="btn solid" href="#apps">Explore our apps →</a>
+            <a class="btn ghost" href="https://www.instagram.com/madebyoddwell/" target="_blank" rel="noopener">@madebyoddwell</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-label="Everyday questions behind our apps">
+    <div class="ticker-track">
+      <ul>
+        <li>What is this sweater actually made of?</li>
+        <li>What are we eating tonight?</li>
+        <li>Is linen worth it?</li>
+        <li>Why is deciding dinner harder than making it?</li>
+        <li>Does expensive mean natural fibers?</li>
+        <li>What should we build next?</li>
+      </ul>
+      <ul aria-hidden="true">
+        <li>What is this sweater actually made of?</li>
+        <li>What are we eating tonight?</li>
+        <li>Is linen worth it?</li>
+        <li>Why is deciding dinner harder than making it?</li>
+        <li>Does expensive mean natural fibers?</li>
+        <li>What should we build next?</li>
+      </ul>
+    </div>
+  </div>
+
+  <section class="block" id="apps">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>The collection</h2>
+        <p>Each app starts as one everyday question. Here's what we've made so far.</p>
+      </div>
+
+      <div class="tags">
+        <article class="tag wove">
+          <div class="tag-top"><span class="num">No. 001</span><span class="status live">Out now</span></div>
+          <h3>Wove</h3>
+          <p class="promise">Know what's in your clothes.</p>
+          <dl>
+            <div><dt>The question</dt><dd>What are my clothes really made of?</dd></div>
+            <div><dt>Does</dt><dd>Decodes fabric labels so you can shop with intention</dd></div>
+            <div><dt>For</dt><dd>Natural-fiber fans, capsule wardrobes, label readers</dd></div>
+            <div><dt>Find it</dt><dd>@woveapp</dd></div>
+          </dl>
+          <!-- TODO: swap for the Wove App Store / landing page link (with UTM) -->
+          <a class="go" href="https://www.instagram.com/woveapp/" target="_blank" rel="noopener">Meet Wove →</a>
+        </article>
+
+        <article class="tag cook">
+          <div class="tag-top"><span class="num">No. 002</span><span class="status">Coming soon</span></div>
+          <h3>Cook Club</h3>
+          <p class="promise">Less “what's for dinner?” More dinner.</p>
+          <dl>
+            <div><dt>The question</dt><dd>What are we eating tonight?</dd></div>
+            <div><dt>Does</dt><dd>Takes the deciding out of weeknight dinners</dd></div>
+            <div><dt>For</dt><dd>Busy families, weeknight cooks, tired deciders</dd></div>
+            <div><dt>Find it</dt><dd>@getcookclub</dd></div>
+          </dl>
+          <!-- TODO: swap for the Cook Club launch-list / App Store link (with UTM) -->
+          <a class="go" href="https://www.instagram.com/getcookclub/" target="_blank" rel="noopener">Meet Cook Club →</a>
+        </article>
+
+        <article class="tag faith">
+          <div class="tag-top"><span class="num">No. 003</span><span class="status">In the works</span></div>
+          <h3>Faith Under the Stars</h3>
+          <p class="promise">Coming soon from Oddwell.</p>
+          <!-- TODO: add Faith Under the Stars details, status and link -->
+          <dl>
+            <div><dt>Status</dt><dd>The newest app in the family</dd></div>
+            <div><dt>Find it</dt><dd>@madebyoddwell</dd></div>
+          </dl>
+          <a class="go" href="https://www.instagram.com/madebyoddwell/" target="_blank" rel="noopener">Follow along →</a>
+        </article>
+      </div>
+
+      <div class="next">
+        <p><strong>What's next?</strong> Our next app could come from your idea.</p>
+        <a href="#say-hi">Share an app idea →</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="block maker" id="maker">
+    <div class="wrap maker-grid">
+      <blockquote>
+        <span class="mark" aria-hidden="true">ow.</span>
+        A 9–5, a family, and a habit of turning everyday frustrations into <span class="solved">actual apps.</span>
+      </blockquote>
+      <div class="body">
+        <p>Oddwell is where my side quests go. I kept reading clothing labels in the store and wondering what half the fibers were, so I built Wove. I kept losing the nightly “what are we eating?” debate, so I built Cook Club.</p>
+        <p>Each app is made with care and shaped by the people who use it. I love sharing the journey along the way, from first ideas to new features, and hearing what would make everyday life a little easier.</p>
+        <p class="sig label">Emily Hemphill · Founder · <a href="https://www.instagram.com/emmhemphill/" target="_blank" rel="noopener">@emmhemphill</a></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="block prompt" id="say-hi">
+    <div class="wrap prompt-inner">
+      <h2>Have an idea for an <span class="solved">app?</span></h2>
+      <div>
+        <p>Is there an everyday problem you wish an app would fix? Send us a message on Instagram. We read every idea, and your suggestion could become our next app.</p>
+        <a class="btn solid" href="https://ig.me/m/madebyoddwell" target="_blank" rel="noopener">Message us on Instagram →</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot">
+    <div>
+      <a class="logo" href="#top"><span class="mark" aria-hidden="true">ow.</span><span class="wordmark-sm">oddwell.</span></a>
+      <p class="small">Your Roman empires, <span class="solved">solved.</span> © 2026 Oddwell.</p>
+    </div>
+    <ul>
+      <li><a href="https://www.instagram.com/madebyoddwell/" target="_blank" rel="noopener">Oddwell</a></li>
+      <li><a href="https://www.instagram.com/woveapp/" target="_blank" rel="noopener">Wove</a></li>
+      <li><a href="https://www.instagram.com/emmhemphill/" target="_blank" rel="noopener">Emily Hemphill</a></li>
+      <li><a href="https://www.instagram.com/getcookclub/" target="_blank" rel="noopener">Cook Club</a></li>
+    </ul>
+  </div>
+</footer>
+</body>
+</html>
